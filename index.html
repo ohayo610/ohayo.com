@@ -521,28 +521,33 @@
                 </div>
             </div>
         </section>
+       <section id="order" class="order-section">
+  <div class="container">
+    <h2>🛒 Order Your Copy Now</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+      Support local art and discover a thrilling manga story like no other.
+    </p>
 
-        <section id="order" class="order-section">
-            <div class="container">
-                <h2>🛒 Order Your Copy Now</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Support local art and discover a thrilling manga story like no other.</p>
-                
-                <div class="order-form">
-                    <div class="form-group">
-                        <label for="phone">📞 Phone Number</label>
-                        <input type="tel" id="phone" placeholder="Enter your phone number" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="quantity">📦 Quantity</label>
-                        <input type="number" id="quantity" min="1" value="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">👤 Your Name</label>
-                        <input type="text" id="name" placeholder="Enter your name" required>
-                    </div>
-                    <button class="order-btn" onclick="submitOrder()">
-                        👉 Order Now - 20 DT
-                    </button>
+    <form action="https://formsubmit.co/dhaferakira@gmail.com" method="POST" onsubmit="return submitOrder();">
+      <!-- Optional: hidden fields for subject and template -->
+      <input type="hidden" name="_subject" value="New Manga Book Order!">
+      <input type="hidden" name="_template" value="table">
+
+      <div class="order-form">
+        <div class="form-group">
+          <label for="phone">📞 Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+        </div>
+        <div class="form-group">
+          <label for="quantity">📦 Quantity</label>
+          <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+        </div>
+        <div class="form-group">
+          <label for="name">👤 Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+        <button type="submit" class="order-btn">
+          👉 Order Now - 20 DT
                 </div>
                 <p style="margin-top: 20px; font-size: 0.9rem;">We'll contact you directly to confirm your order.</p>
             </div>
@@ -684,6 +689,7 @@
     </div>
 
     <script>
+        
         function openModal() {
             document.getElementById('storyModal').style.display = 'block';
         }
@@ -692,26 +698,23 @@
             document.getElementById('storyModal').style.display = 'none';
         }
 
-        function submitOrder() {
-            const phone = document.getElementById('phone').value;
-            const quantity = document.getElementById('quantity').value;
-            const name = document.getElementById('name').value;
-            
-            if (!phone || !quantity || !name) {
-                alert('Please fill in all fields!');
-                return;
-            }
-            
-            const message = `New Order from ${name}:\n\nPhone: ${phone}\nQuantity: ${quantity}\nTotal: ${quantity * 20} DT\n\nPlease contact to confirm the order.`;
-            
-            alert('Thank you for your order! We will contact you soon to confirm your order details.');
-            
-            // Clear form
-            document.getElementById('phone').value = '';
-            document.getElementById('quantity').value = '1';
-            document.getElementById('name').value = '';
-        }
+       function submitOrder() {
+    const phone = document.getElementById('phone').value;
+    const quantity = document.getElementById('quantity').value;
+    const name = document.getElementById('name').value;
 
+    if (!phone || !quantity || !name) {
+      alert('Please fill in all fields!');
+      return false; // Prevent form submission
+    }
+
+    const total = quantity * 20;
+    const message = `New Order from ${name}:\nPhone: ${phone}\nQuantity: ${quantity}\nTotal: ${total} DT`;
+
+    alert('Thank you for your order! We will contact you soon to confirm your order details.');
+
+    return true; // Allow form submission
+  }
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
